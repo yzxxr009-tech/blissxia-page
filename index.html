@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>夏祥瑞 BlissXia | 一人公司AI智能体实战教练</title>
-  <meta name="description" content="专注于帮助中小微创业者用AI智能体实现业务自动化，让AI成为你的最强同事。" />
-  <meta property="og:title" content="夏祥瑞 BlissXia | 一人公司AI智能体实战教练" />
-  <meta property="og:description" content="让AI成为你的最强同事。专注于帮助中小微创业者用AI智能体实现业务自动化。" />
+  <title>夏祥瑞 BlissXia | EA智能交易 · AI实战教练 · 一人公司增长</title>
+  <meta name="description" content="EA全自动交易工具，先试用后付费，盈利再分成。一人公司AI智能体实战教练，帮你实现业务自动化。让AI成为你的最强同事。" />
+  <meta property="og:title" content="夏祥瑞 BlissXia | EA智能交易 · 先试用后付费" />
+  <meta property="og:description" content="EA全自动交易，半年盈利5万+。先试用后付费，不盈利不收钱。还有AI智能体搭建服务。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gsyyx.netlify.app/" />
   <meta property="og:image" content="https://gsyyx.netlify.app/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="夏祥瑞 BlissXia | 一人公司AI智能体实战教练" />
-  <meta name="twitter:description" content="让AI成为你的最强同事。" />
+  <meta name="twitter:title" content="夏祥瑞 BlissXia | EA智能交易" />
+  <meta name="twitter:description" content="EA全自动交易，先试用后付费，盈利再分成。" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -21,10 +21,13 @@
       --primary-dark: #1d4ed8;
       --primary-light: #dbeafe;
       --accent: #0ea5e9;
+      --accent2: #10b981;
       --bg: #f8fafc;
+      --bg-dark: #0f172a;
       --text: #1e293b;
       --text-light: #64748b;
       --white: #ffffff;
+      --border: #e2e8f0;
     }
 
     body {
@@ -32,11 +35,44 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Hero */
+    /* === Nav === */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand { font-weight: 700; font-size: 1.1rem; color: var(--primary); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-light); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      background: var(--primary);
+      color: white !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem !important;
+    }
+    .nav-cta:hover { background: var(--primary-dark); }
+
+    /* === Hero === */
     .hero {
-      background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #0ea5e9 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
       color: white;
       min-height: 100vh;
       display: flex;
@@ -44,389 +80,625 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 2rem;
+      padding: 6rem 2rem 4rem;
       position: relative;
       overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
-      width: 600px;
-      height: 600px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 50%;
-      top: -200px;
-      right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%);
+      top: -200px; right: -200px;
     }
-
     .hero::after {
       content: '';
       position: absolute;
-      width: 400px;
-      height: 400px;
-      background: rgba(255,255,255,0.03);
-      border-radius: 50%;
-      bottom: -100px;
-      left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
     }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: #6ee7b7;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge .dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
     .avatar {
-      width: 120px;
-      height: 120px;
+      width: 110px; height: 110px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      border: 3px solid rgba(255,255,255,0.3);
+      font-size: 2.2rem; font-weight: 700;
+      margin-bottom: 1.2rem;
+      border: 2px solid rgba(255,255,255,0.2);
       backdrop-filter: blur(10px);
     }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.02em;
-    }
-
-    .hero .en-name {
-      font-size: 1.1rem;
-      font-weight: 400;
-      opacity: 0.8;
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-    }
-
-    .tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.15);
+    .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.2rem; }
+    .hero .en-name { font-size: 1.05rem; opacity: 0.7; margin-bottom: 0.8rem; letter-spacing: 0.06em; }
+    .hero .tags { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.2rem; }
+    .hero .tag {
+      background: rgba(255,255,255,0.12);
       backdrop-filter: blur(10px);
-      padding: 0.4rem 1.2rem;
+      padding: 0.35rem 1rem;
       border-radius: 50px;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.82rem;
+      border: 1px solid rgba(255,255,255,0.15);
     }
-
-    .slogan {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      opacity: 0.95;
-    }
-
-    .slogan-en {
-      font-size: 0.95rem;
-      opacity: 0.7;
-      margin-bottom: 2rem;
-      font-style: italic;
-    }
-
-    /* Sections */
-    .section {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
+    .hero .slogan { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .hero .slogan-sub { font-size: 0.95rem; opacity: 0.65; margin-bottom: 2rem; font-style: italic; }
+    .hero .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .cta-btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
       font-weight: 700;
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
     }
-
-    .section-title .icon {
-      width: 36px;
-      height: 36px;
-      background: var(--primary);
+    .cta-primary {
+      background: var(--accent2);
       color: white;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
+      box-shadow: 0 4px 20px rgba(16,185,129,0.35);
     }
-
-    /* About */
-    .about-text {
-      font-size: 1.1rem;
-      color: var(--text-light);
-      line-height: 1.9;
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.45); }
+    .cta-secondary {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
     }
+    .cta-secondary:hover { background: rgba(255,255,255,0.18); }
 
-    .highlight {
-      color: var(--primary);
+    /* === Sections Common === */
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.25rem 0.8rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
     }
+    .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    .section-desc { color: var(--text-light); font-size: 1.05rem; max-width: 600px; margin-bottom: 3rem; line-height: 1.8; }
+    .section-dark { background: var(--bg-dark); color: white; }
+    .section-dark .section-desc { color: rgba(255,255,255,0.6); }
+    .section-dark .section-title { color: white; }
+    .section-dark .section-label { background: rgba(37,99,235,0.3); color: #93c5fd; }
 
-    /* Services */
-    .services {
+    /* === Trust Strip === */
+    .trust-strip {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    .trust-strip-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-light); font-weight: 500; }
+    .trust-item .icon { font-size: 1.2rem; }
+
+    /* === Product Cards === */
+    .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
       margin-top: 2rem;
     }
-
-    .service-card {
-      background: var(--white);
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+    .product-card.featured { border-color: var(--accent2); }
+    .product-card.featured::before {
+      content: '推荐';
+      position: absolute;
+      top: 20px; right: -30px;
+      background: var(--accent2);
+      color: white;
+      padding: 0.2rem 2.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+    }
+    .product-icon {
+      width: 56px; height: 56px;
       border-radius: 16px;
-      padding: 2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+    .product-icon.ea { background: #ecfdf5; }
+    .product-icon.ai { background: var(--primary-light); }
+    .product-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .product-card .subtitle { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem; }
+    .product-features { list-style: none; margin-bottom: 1.5rem; }
+    .product-features li {
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .product-features li:last-child { border: none; }
+    .product-features li::before { content: '✓'; color: var(--accent2); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .product-price { font-size: 2rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .product-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-light); }
+    .product-note { font-size: 0.8rem; color: var(--text-light); margin-bottom: 1.2rem; }
+    .btn {
+      display: inline-block;
+      width: 100%;
       text-align: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: 1px solid #e2e8f0;
+      padding: 0.8rem 0;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
     }
+    .btn-green { background: var(--accent2); color: white; }
+    .btn-green:hover { background: #059669; }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: white; }
 
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(37,99,235,0.12);
+    /* === Funnel Section === */
+    .funnel { position: relative; margin-top: 2rem; }
+    .funnel-step {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 2rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.2s;
     }
-
-    .service-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--primary-light);
+    .funnel-step:hover { background: rgba(255,255,255,0.08); }
+    .funnel-num {
+      width: 48px; height: 48px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1rem;
-      font-size: 1.5rem;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
     }
+    .funnel-num.n1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .funnel-num.n2 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .funnel-num.n3 { background: linear-gradient(135deg, #ec4899, #db2777); }
+    .funnel-num.n4 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .funnel-num.n5 { background: linear-gradient(135deg, #10b981, #059669); }
+    .funnel-step h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .funnel-step p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .funnel-arrow { text-align: center; color: rgba(255,255,255,0.2); font-size: 1.5rem; margin: -0.3rem 0; }
 
-    .service-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+    /* === Mechanism Cards === */
+    .mech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
-
-    .service-card p {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      line-height: 1.5;
+    .mech-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.2s;
     }
+    .mech-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+    .mech-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .mech-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .mech-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
 
-    /* Contact */
+    /* === Stats === */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-card .num { font-size: 2.2rem; font-weight: 800; color: var(--accent2); }
+    .stat-card .label { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+
+    /* === FAQ === */
+    .faq-list { margin-top: 2rem; }
+    .faq-item {
+      background: white;
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 0.8rem;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .faq-item:hover { border-color: var(--primary); }
+    .faq-q { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+    .faq-q::before { content: 'Q'; color: var(--primary); font-size: 0.8rem; font-weight: 800; }
+    .faq-a { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; padding-left: 1.5rem; }
+    .faq-a::before { content: 'A '; color: var(--accent2); font-weight: 700; }
+
+    /* === Contact === */
     .contact-section {
-      background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       color: white;
       text-align: center;
     }
-
-    .contact-section .section-title {
-      justify-content: center;
-      color: white;
-    }
-
-    .contact-section .section-title .icon {
-      background: rgba(255,255,255,0.2);
-    }
-
     .contact-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
-
     .contact-card {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.08);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       padding: 2rem 1.5rem;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.1);
       transition: background 0.2s;
     }
+    .contact-card:hover { background: rgba(255,255,255,0.14); }
+    .contact-card .label { font-size: 0.78rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+    .contact-card .value { font-size: 1.15rem; font-weight: 700; word-break: break-all; }
+    .contact-card .value a { color: white; text-decoration: none; }
+    .contact-card .value a:hover { text-decoration: underline; }
+    .wechat-copy { cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .wechat-copy::after { content: '📋'; font-size: 0.85rem; opacity: 0.5; }
 
-    .contact-card:hover {
-      background: rgba(255,255,255,0.18);
-    }
-
-    .contact-card .label {
-      font-size: 0.8rem;
-      opacity: 0.7;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-card .value {
-      font-size: 1.2rem;
-      font-weight: 700;
-      word-break: break-all;
-    }
-
-    .contact-card .value a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .contact-card .value a:hover {
-      text-decoration: underline;
-    }
-
-    .wechat-copy {
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .wechat-copy::after {
-      content: '📋';
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
-
-    /* Footer */
+    /* === Footer === */
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 2.5rem 2rem;
       color: var(--text-light);
       font-size: 0.85rem;
-      border-top: 1px solid #e2e8f0;
-      background: var(--white);
-    }
-
-    /* CTA */
-    .cta-btn {
-      display: inline-block;
+      border-top: 1px solid var(--border);
       background: white;
-      color: var(--primary);
-      padding: 0.9rem 2.5rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .hero .slogan { font-size: 1.2rem; }
+      .section { padding: 3.5rem 1.5rem; }
+      .section-title { font-size: 1.5rem; }
+      .product-grid { grid-template-columns: 1fr; }
+      .funnel-step { flex-direction: column; text-align: center; gap: 0.8rem; }
+      .trust-strip-inner { gap: 1.5rem; }
     }
 
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
-    /* Responsive */
-    @media (max-width: 640px) {
-      .hero h1 { font-size: 1.8rem; }
-      .slogan { font-size: 1.1rem; }
-      .section { padding: 3rem 1.5rem; }
-      .section-title { font-size: 1.4rem; }
-    }
-
-    /* Animations */
+    /* === Animations === */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    .animate { animation: fadeUp 0.7s ease both; }
+    .hero > * { animation: fadeUp 0.6s ease both; }
+    .hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero > *:nth-child(2) { animation-delay: 0.1s; }
+    .hero > *:nth-child(3) { animation-delay: 0.15s; }
+    .hero > *:nth-child(4) { animation-delay: 0.2s; }
+    .hero > *:nth-child(5) { animation-delay: 0.25s; }
+    .hero > *:nth-child(6) { animation-delay: 0.3s; }
+    .hero > *:nth-child(7) { animation-delay: 0.35s; }
+    .hero > *:nth-child(8) { animation-delay: 0.4s; }
+    .hero > *:nth-child(9) { animation-delay: 0.45s; }
+    .hero > *:nth-child(10) { animation-delay: 0.5s; }
 
-    .hero > * {
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .hero > *:nth-child(1) { animation-delay: 0.1s; }
-    .hero > *:nth-child(2) { animation-delay: 0.2s; }
-    .hero > *:nth-child(3) { animation-delay: 0.3s; }
-    .hero > *:nth-child(4) { animation-delay: 0.4s; }
-    .hero > *:nth-child(5) { animation-delay: 0.5s; }
-    .hero > *:nth-child(6) { animation-delay: 0.6s; }
-    .hero > *:nth-child(7) { animation-delay: 0.7s; }
+    .highlight { color: var(--primary); font-weight: 600; }
+    .highlight-green { color: var(--accent2); font-weight: 600; }
   </style>
 </head>
 <body>
 
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">BlissXia</a>
+      <ul class="nav-links">
+        <li><a href="#product">产品</a></li>
+        <li><a href="#funnel">转化路径</a></li>
+        <li><a href="#trust">信任机制</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact" class="nav-cta">免费咨询</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <!-- Hero -->
   <section class="hero">
+    <div class="hero-badge"><span class="dot"></span> 现已开放试用</div>
     <div class="avatar">XR</div>
     <h1>夏祥瑞</h1>
-    <div class="en-name">BlissXia</div>
-    <div class="tag">一人公司 AI 智能体实战教练</div>
+    <div class="en-name">BlissXia · 君信科技联合创始人</div>
+    <div class="tags">
+      <span class="tag">EA 智能交易</span>
+      <span class="tag">AI 智能体实战教练</span>
+      <span class="tag">一人公司增长</span>
+    </div>
     <div class="slogan">让 AI 成为你的最强同事</div>
-    <div class="slogan-en">Make AI Your Strongest Teammate</div>
-    <a href="#contact" class="cta-btn">联系我</a>
+    <div class="slogan-sub">Make AI Your Strongest Teammate</div>
+    <div class="cta-group">
+      <a href="#product" class="cta-btn cta-primary">了解产品 →</a>
+      <a href="#contact" class="cta-btn cta-secondary">免费咨询</a>
+    </div>
   </section>
+
+  <!-- Trust Strip -->
+  <div class="trust-strip">
+    <div class="trust-strip-inner">
+      <div class="trust-item"><span class="icon">🔒</span> 99元押金 · 不盈利全额退</div>
+      <div class="trust-item"><span class="icon">🤝</span> 先试用后付费 · 盈利再分成</div>
+      <div class="trust-item"><span class="icon">🎯</span> 1对1远程协助 · 手把手教</div>
+      <div class="trust-item"><span class="icon">📊</span> 真实交易记录 · Followme可查</div>
+    </div>
+  </div>
 
   <!-- About -->
   <section class="section" id="about">
-    <div class="section-title">
-      <div class="icon">👤</div>
-      关于我
-    </div>
-    <div class="about-text">
-      我是 <span class="highlight">夏祥瑞（BlissXia）</span>，
-      <span class="highlight">君信科技联合创始人</span>，
-      专注于帮助中小微创业者用 <span class="highlight">AI 智能体</span> 实现业务自动化。
-      <br><br>
-      我相信，AI 不应该只是聊天工具，而应该成为每个创业者真正可用的
-      <span class="highlight">数字员工</span>。
-      从内容生产到客户管理，从数据分析到决策辅助，
-      让一人公司拥有十人团队的战斗力。
+    <div class="section-inner">
+      <span class="section-label">ABOUT</span>
+      <h2 class="section-title">关于我</h2>
+      <p class="section-desc">
+        我是 <span class="highlight">夏祥瑞（BlissXia）</span>，<span class="highlight">君信科技联合创始人</span>，
+        一人公司 AI 智能体实战教练。我跑通了两条业务线：<span class="highlight-green">EA 全自动交易</span>和<span class="highlight">AI 智能体自动化</span>。
+        核心理念：AI 不应只是聊天工具，而应成为每个创业者真正的<span class="highlight">数字员工</span>，让一人公司拥有十人团队的战斗力。
+      </p>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="section" id="services">
-    <div class="section-title">
-      <div class="icon">⚡</div>
-      我能帮你做什么
+  <!-- Products -->
+  <section class="section" id="product" style="background:#fff;">
+    <div class="section-inner">
+      <span class="section-label">PRODUCTS</span>
+      <h2 class="section-title">产品与服务</h2>
+      <p class="section-desc">两条核心业务线，覆盖交易自动化与业务自动化</p>
+      <div class="product-grid">
+
+        <!-- EA Product -->
+        <div class="product-card featured">
+          <div class="product-icon ea">💹</div>
+          <h3>EA 全自动交易工具</h3>
+          <div class="subtitle">MT4 智能交易系统 · 全自动运行</div>
+          <ul class="product-features">
+            <li>全自动下单/止损/止盈，无需盯盘</li>
+            <li>每天只需检查 5 分钟</li>
+            <li>实盘运行半年，盈利 5万+（Followme 可查）</li>
+            <li>1对1远程协助安装 + 视频教程</li>
+            <li>7天试用，无盈利全额退款</li>
+          </ul>
+          <div class="product-price">99 <span>元押金起</span></div>
+          <div class="product-note">先试用后付费 · 盈利后30%分成 · 不盈利不收钱</div>
+          <a href="#contact" class="btn btn-green">立即试用 →</a>
+        </div>
+
+        <!-- AI Service -->
+        <div class="product-card">
+          <div class="product-icon ai">🤖</div>
+          <h3>AI 智能体搭建服务</h3>
+          <div class="subtitle">定制你的 AI 数字员工</div>
+          <ul class="product-features">
+            <li>业务 AI 智能体定制搭建</li>
+            <li>重复工作流自动化改造</li>
+            <li>一人公司增长方案设计</li>
+            <li>1对1实战教练辅导</li>
+            <li>免费初次咨询，按需报价</li>
+          </ul>
+          <div class="product-price">定制 <span>报价</span></div>
+          <div class="product-note">先聊需求，再定方案</div>
+          <a href="#contact" class="btn btn-outline">免费咨询 →</a>
+        </div>
+
+      </div>
     </div>
-    <div class="services">
-      <div class="service-card">
-        <div class="service-icon">🤖</div>
-        <h3>AI 智能体搭建</h3>
-        <p>定制适合你业务的 AI 智能体，实现自动化运营</p>
+  </section>
+
+  <!-- Conversion Funnel -->
+  <section class="section section-dark" id="funnel">
+    <div class="section-inner">
+      <span class="section-label">HOW IT WORKS</span>
+      <h2 class="section-title">EA 转化闭环：5步让你放心使用</h2>
+      <p class="section-desc">透明化流程，每一步都为你考虑</p>
+
+      <div class="funnel">
+        <div class="funnel-step">
+          <div class="funnel-num n1">01</div>
+          <div>
+            <h4>触达 Reach</h4>
+            <p>Followme 实盘展示 + 微信公众号 + 小红书多渠道曝光，预估触达 300-500 人</p>
+          </div>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <div class="funnel-num n2">02</div>
+          <div>
+            <h4>吸引 Attract</h4>
+            <p>真实盈利记录 + "30%盈利分成"利益一致 + "先试用后付费"零风险承诺，建立信任</p>
+          </div>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <div class="funnel-num n3">03</div>
+          <div>
+            <h4>转化 Convert</h4>
+            <p>收 99 元押金 → 试用 7 天 → 无盈利全额退 / 有盈利押金抵分成，消除信任障碍</p>
+          </div>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <div class="funnel-num n4">04</div>
+          <div>
+            <h4>交付 Deliver</h4>
+            <p>发 EA 安装包 + 视频教程 + 1对1远程协助（30-60分钟手把手教），7天跟进服务</p>
+          </div>
+        </div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-step">
+          <div class="funnel-num n5">05</div>
+          <div>
+            <h4>复购 & 推荐</h4>
+            <p>持续分账 + 推荐奖励（最高终身免费），让用户帮你裂变增长</p>
+          </div>
+        </div>
       </div>
-      <div class="service-card">
-        <div class="service-icon">🔄</div>
-        <h3>业务流程自动化</h3>
-        <p>梳理并自动化重复工作流，释放你的时间</p>
+    </div>
+  </section>
+
+  <!-- Trust Mechanism -->
+  <section class="section" id="trust" style="background:#fff;">
+    <div class="section-inner">
+      <span class="section-label">TRUST</span>
+      <h2 class="section-title">三位一体信任机制</h2>
+      <p class="section-desc">你的顾虑我们都想到了，用机制而非承诺保障你的利益</p>
+      <div class="mech-grid">
+        <div class="mech-card">
+          <div class="mech-icon">🛡️</div>
+          <h3>信任机制</h3>
+          <p>99 元押金 · 7 天试用 · 无盈利全额退 · 有盈利押金抵分成。Followme 公开记录，每笔盈利透明可查。</p>
+        </div>
+        <div class="mech-card">
+          <div class="mech-icon">✅</div>
+          <h3>验证机制</h3>
+          <p>试用协议明确条款 · 盈利后 3 天内主动联系支付 · 社区曝光不诚信用户 · 未来升级 MT4 只读授权自动验证。</p>
+        </div>
+        <div class="mech-card">
+          <div class="mech-icon">🎁</div>
+          <h3>激励机制</h3>
+          <p>Early Bird 奖励：分成降至 25% · 推荐 1 人免 1 月分成 · 推荐 5 人终身免费 · 社区荣誉公开表彰诚信用户。</p>
+        </div>
       </div>
-      <div class="service-card">
-        <div class="service-icon">📈</div>
-        <h3>一人公司增长</h3>
-        <p>用 AI 工具放大个人产能，实现指数级增长</p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="section section-dark" id="stats">
+    <div class="section-inner">
+      <span class="section-label">METRICS</span>
+      <h2 class="section-title">关键数据</h2>
+      <p class="section-desc">EA 转化漏斗预估指标（基于 Followme 现有粉丝基础）</p>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="num">300-500</div><div class="label">预估触达人数</div></div>
+        <div class="stat-card"><div class="num">30-50</div><div class="label">咨询人数</div></div>
+        <div class="stat-card"><div class="num">15-25</div><div class="label">试用人数</div></div>
+        <div class="stat-card"><div class="num">7-10</div><div class="label">首月付费人数</div></div>
+        <div class="stat-card"><div class="num">70%</div><div class="label">运行→付费转化率</div></div>
+        <div class="stat-card"><div class="num">7-12</div><div class="label">第3月总付费用户</div></div>
       </div>
-      <div class="service-card">
-        <div class="service-icon">🎓</div>
-        <h3>实战教练辅导</h3>
-        <p>手把手带你落地 AI，不只是理论</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" style="background:#fff;">
+    <div class="section-inner">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">常见问题</h2>
+      <p class="section-desc">你可能关心的几个问题</p>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">EA 真的能盈利吗？</div>
+          <div class="faq-a">EA 是交易工具，不保证盈利。但我本人实盘运行半年盈利 5万+，Followme 可查真实记录。交易有风险，请理性决策。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">我不会用 MT4，能学会吗？</div>
+          <div class="faq-a">完全没问题。我提供 5 分钟安装视频教程 + 1对1远程协助（TeamViewer/向日葵），手把手教你安装和设置参数，30-60 分钟搞定。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">试用结束不想用了，押金能退吗？</div>
+          <div class="faq-a">能。7 天内无盈利，99 元全额退还。协议写得清清楚楚，按流程走就行。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">30% 分成是怎么算的？</div>
+          <div class="faq-a">盈利后支付盈利金额的 30%。比如你这个月 EA 帮你赚了 1000 元，付我 300 元。不盈利不收费。99 元押金直接抵首批分成。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">EA 需要一直开着电脑吗？</div>
+          <div class="faq-a">是的，MT4 需要保持运行。建议用 VPS 云服务器（约 30 元/月），24 小时在线，不用担心电脑关机。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">能把 EA 分享给别人吗？</div>
+          <div class="faq-a">不能。协议明确规定不得传播/售卖 EA。但你可以推荐朋友来试用，推荐成功有奖励（免分成甚至终身免费）。</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
   <section class="section contact-section" id="contact">
-    <div class="section-title">
-      <div class="icon">💬</div>
-      联系我
-    </div>
-    <p style="opacity:0.8; margin-bottom:1rem;">欢迎加我微信或发邮件交流，免费咨询</p>
-    <div class="contact-cards">
-      <div class="contact-card">
-        <div class="label">邮箱 Email</div>
-        <div class="value">
-          <a href="mailto:Yzxxr@qq.com">Yzxxr@qq.com</a>
+    <div class="section-inner">
+      <span class="section-label" style="background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.8);">CONTACT</span>
+      <h2 class="section-title" style="color:white;">联系我</h2>
+      <p class="section-desc" style="color:rgba(255,255,255,0.65); margin:0 auto 2rem;">欢迎加微信或发邮件交流，免费咨询</p>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="label">邮箱 Email</div>
+          <div class="value"><a href="mailto:Yzxxr@qq.com">Yzxxr@qq.com</a></div>
         </div>
-      </div>
-      <div class="contact-card">
-        <div class="label">微信 WeChat</div>
-        <div class="value">
-          <span class="wechat-copy" onclick="copyWechat()">13272920669</span>
+        <div class="contact-card">
+          <div class="label">微信 WeChat</div>
+          <div class="value"><span class="wechat-copy" onclick="copyWechat()">13272920669</span></div>
+        </div>
+        <div class="contact-card">
+          <div class="label">Followme</div>
+          <div class="value" style="font-size:0.95rem;">搜索「夏祥瑞」查看实盘记录</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    © 2025 夏祥瑞 BlissXia · 君信科技 · 让 AI 成为你的最强同事
+    <p>© 2025 夏祥瑞 BlissXia · 君信科技 · 让 AI 成为你的最强同事</p>
+    <p style="margin-top:0.3rem;font-size:0.78rem;color:#94a3b8;">交易有风险，EA 不保证盈利，请理性决策。</p>
   </footer>
 
   <script>
