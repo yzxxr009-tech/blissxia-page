@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>夏祥瑞 BlissXia | 一人公司AI智能体实战教练</title>
+  <meta name="description" content="专注于帮助中小微创业者用AI智能体实现业务自动化，让AI成为你的最强同事。" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #dbeafe;
+      --accent: #0ea5e9;
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #0ea5e9 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      top: -200px;
+      right: -200px;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      border: 3px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .en-name {
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .slogan {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      opacity: 0.95;
+    }
+
+    .slogan-en {
+      font-size: 0.95rem;
+      opacity: 0.7;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    /* Sections */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title .icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    /* About */
+    .about-text {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      line-height: 1.9;
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Services */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #e2e8f0;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(37,99,235,0.12);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-light);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+    }
+
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Contact */
+    .contact-section {
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .contact-section .section-title {
+      justify-content: center;
+      color: white;
+    }
+
+    .contact-section .section-title .icon {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.2s;
+    }
+
+    .contact-card:hover {
+      background: rgba(255,255,255,0.18);
+    }
+
+    .contact-card .label {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card .value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      word-break: break-all;
+    }
+
+    .contact-card .value a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .contact-card .value a:hover {
+      text-decoration: underline;
+    }
+
+    .wechat-copy {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .wechat-copy::after {
+      content: '📋';
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-light);
+      font-size: 0.85rem;
+      border-top: 1px solid #e2e8f0;
+      background: var(--white);
+    }
+
+    /* CTA */
+    .cta-btn {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      padding: 0.9rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.8rem; }
+      .slogan { font-size: 1.1rem; }
+      .section { padding: 3rem 1.5rem; }
+      .section-title { font-size: 1.4rem; }
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero > * {
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .hero > *:nth-child(3) { animation-delay: 0.3s; }
+    .hero > *:nth-child(4) { animation-delay: 0.4s; }
+    .hero > *:nth-child(5) { animation-delay: 0.5s; }
+    .hero > *:nth-child(6) { animation-delay: 0.6s; }
+    .hero > *:nth-child(7) { animation-delay: 0.7s; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="avatar">XR</div>
+    <h1>夏祥瑞</h1>
+    <div class="en-name">BlissXia</div>
+    <div class="tag">一人公司 AI 智能体实战教练</div>
+    <div class="slogan">让 AI 成为你的最强同事</div>
+    <div class="slogan-en">Make AI Your Strongest Teammate</div>
+    <a href="#contact" class="cta-btn">联系我</a>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="section-title">
+      <div class="icon">👤</div>
+      关于我
+    </div>
+    <div class="about-text">
+      我是 <span class="highlight">夏祥瑞（BlissXia）</span>，
+      <span class="highlight">君信科技联合创始人</span>，
+      专注于帮助中小微创业者用 <span class="highlight">AI 智能体</span> 实现业务自动化。
+      <br><br>
+      我相信，AI 不应该只是聊天工具，而应该成为每个创业者真正可用的
+      <span class="highlight">数字员工</span>。
+      从内容生产到客户管理，从数据分析到决策辅助，
+      让一人公司拥有十人团队的战斗力。
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="section-title">
+      <div class="icon">⚡</div>
+      我能帮你做什么
+    </div>
+    <div class="services">
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>AI 智能体搭建</h3>
+        <p>定制适合你业务的 AI 智能体，实现自动化运营</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔄</div>
+        <h3>业务流程自动化</h3>
+        <p>梳理并自动化重复工作流，释放你的时间</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>一人公司增长</h3>
+        <p>用 AI 工具放大个人产能，实现指数级增长</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>实战教练辅导</h3>
+        <p>手把手带你落地 AI，不只是理论</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact-section" id="contact">
+    <div class="section-title">
+      <div class="icon">💬</div>
+      联系我
+    </div>
+    <p style="opacity:0.8; margin-bottom:1rem;">欢迎加我微信或发邮件交流，免费咨询</p>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="label">邮箱 Email</div>
+        <div class="value">
+          <a href="mailto:Yzxxr@qq.com">Yzxxr@qq.com</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="label">微信 WeChat</div>
+        <div class="value">
+          <span class="wechat-copy" onclick="copyWechat()">13272920669</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 夏祥瑞 BlissXia · 君信科技 · 让 AI 成为你的最强同事
+  </footer>
+
+  <script>
+    function copyWechat() {
+      navigator.clipboard.writeText('13272920669').then(() => {
+        const el = document.querySelector('.wechat-copy');
+        const original = el.textContent;
+        el.textContent = '已复制 ✓';
+        el.style.opacity = '0.7';
+        setTimeout(() => {
+          el.textContent = original;
+          el.style.opacity = '1';
+        }, 1500);
+      });
+    }
+  </script>
+
+</body>
+</html>
