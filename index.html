@@ -299,6 +299,69 @@
     .hero > *:nth-child(8) { animation-delay: 0.4s; }
     .hero > *:nth-child(9) { animation-delay: 0.45s; }
     .hero > *:nth-child(10) { animation-delay: 0.5s; }
+
+    /* === Ticker 行情滚动条 === */
+    .ticker {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 0.9rem 0;
+      position: relative;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: ticker-scroll 40s linear infinite;
+      width: max-content;
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .ticker-item { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; font-family: "SF Mono", "Consolas", monospace; }
+    .ticker-item .sym { color: var(--text); font-weight: 600; }
+    .ticker-item .price { color: var(--text-mid); }
+    .ticker-item .chg-up { color: var(--green); }
+    .ticker-item .chg-dn { color: #f87171; }
+    .ticker-item .chg-up::before { content: '▲ '; }
+    .ticker-item .chg-dn::before { content: '▼ '; }
+
+    /* === K线装饰背景 === */
+    .kline-deco {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 45%;
+      opacity: 0.06;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      padding: 2rem;
+    }
+    .kline-bar { flex: 1; background: var(--blue-light); border-radius: 2px 2px 0 0; }
+
+    /* === 策略卡片 === */
+    .strategy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .strategy-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.8rem 1.5rem; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .strategy-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+    .strategy-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; color: var(--blue-lighter); background: rgba(59,130,246,0.15); padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+    .strategy-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .strategy-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
+    .strategy-metrics { display: flex; gap: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .strategy-metrics div { flex: 1; }
+    .strategy-metrics .m-label { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+    .strategy-metrics .m-val { font-size: 0.95rem; font-weight: 700; color: var(--green); margin-top: 0.15rem; }
+
+    /* === 量化数据展示 === */
+    .quant-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.5rem; }
+    .quant-stat { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; text-align: center; }
+    .quant-stat .qs-val { font-size: 1.6rem; font-weight: 800; color: var(--blue-light); font-family: "SF Mono", "Consolas", monospace; }
+    .quant-stat .qs-label { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.3rem; }
   </style>
 </head>
 <body>
@@ -308,6 +371,7 @@
     <div class="nav-inner">
       <a href="#" class="nav-brand">BlissXia</a>
       <ul class="nav-links">
+        <li><a href="#strategy">策略</a></li>
         <li><a href="#product">产品</a></li>
         <li><a href="#funnel">流程</a></li>
         <li><a href="#trust">信任机制</a></li>
@@ -320,18 +384,33 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-grid"></div>
+    <div class="kline-deco" id="klineDeco"></div>
     <div class="hero-badge"><span class="dot"></span> 现已开放试用</div>
     <h1>夏祥瑞</h1>
     <div class="en-name">BlissXia</div>
-    <div class="tagline">EA 全自动智能交易 · <strong>先试用后付费</strong></div>
+    <div class="tagline">量化 EA 全自动智能交易 · <strong>先试用后付费</strong></div>
     <div class="tagline">实盘运行半年，盈利 <strong>5 万+</strong></div>
-    <div class="slogan">不盈利不收钱 · 盈利再分成 · Followme 真实记录可查</div>
+    <div class="slogan">算法驱动 · 风控护航 · Followme 真实记录可查</div>
     <div class="hero-cta">
       <a href="#product" class="btn-blue">了解详情 →</a>
       <a href="#contact" class="btn-ghost">免费咨询</a>
     </div>
     <div class="hero-scroll">SCROLL ↓</div>
   </section>
+
+  <!-- Ticker 行情条 -->
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <div class="ticker-item"><span class="sym">XAU/USD</span><span class="price">2347.82</span><span class="chg-up">+0.85%</span></div>
+      <div class="ticker-item"><span class="sym">EUR/USD</span><span class="price">1.0842</span><span class="chg-dn">-0.12%</span></div>
+      <div class="ticker-item"><span class="sym">GBP/USD</span><span class="price">1.2715</span><span class="chg-up">+0.23%</span></div>
+      <div class="ticker-item"><span class="sym">USD/JPY</span><span class="price">157.63</span><span class="chg-dn">-0.31%</span></div>
+      <div class="ticker-item"><span class="sym">XAU/USD</span><span class="price">2347.82</span><span class="chg-up">+0.85%</span></div>
+      <div class="ticker-item"><span class="sym">EUR/USD</span><span class="price">1.0842</span><span class="chg-dn">-0.12%</span></div>
+      <div class="ticker-item"><span class="sym">GBP/USD</span><span class="price">1.2715</span><span class="chg-up">+0.23%</span></div>
+      <div class="ticker-item"><span class="sym">USD/JPY</span><span class="price">157.63</span><span class="chg-dn">-0.31%</span></div>
+    </div>
+  </div>
 
   <!-- Trust Bar -->
   <div class="trust-bar">
@@ -348,9 +427,65 @@
     <div class="section-inner">
       <div class="stats-row">
         <div class="stat-cell"><div class="stat-num">5万+</div><div class="stat-label">半年实盘盈利</div></div>
-        <div class="stat-cell"><div class="stat-num">7天</div><div class="stat-label">免费试用期</div></div>
-        <div class="stat-cell"><div class="stat-num">30%</div><div class="stat-label">盈利分成比例</div></div>
+        <div class="stat-cell"><div class="stat-num">68%</div><div class="stat-label">策略胜率</div></div>
+        <div class="stat-cell"><div class="stat-num">1.8</div><div class="stat-label">盈亏比</div></div>
         <div class="stat-cell"><div class="stat-num">1对1</div><div class="stat-label">远程协助安装</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quant Strategy -->
+  <section class="section" id="strategy" style="background: var(--bg2);">
+    <div class="section-inner">
+      <div class="divider"></div>
+      <span class="section-label">QUANT STRATEGY</span>
+      <h2 class="section-title">量化策略引擎</h2>
+      <p class="section-desc">多策略组合驱动，算法信号自动执行，严格风控体系护航每一笔交易</p>
+
+      <div class="strategy-grid">
+        <div class="strategy-card">
+          <span class="strategy-tag">趋势跟踪</span>
+          <h4>动量突破策略</h4>
+          <p>基于均线多头排列 + 动量指标突破入场，捕捉单边趋势行情，大波段盈利</p>
+          <div class="strategy-metrics">
+            <div><div class="m-label">胜率</div><div class="m-val">65%</div></div>
+            <div><div class="m-label">盈亏比</div><div class="m-val">2.1</div></div>
+          </div>
+        </div>
+        <div class="strategy-card">
+          <span class="strategy-tag">均值回归</span>
+          <h4>区间震荡策略</h4>
+          <p>布林带极值反转 + RSI 超买超卖信号，震荡行情高抛低吸，稳定收割</p>
+          <div class="strategy-metrics">
+            <div><div class="m-label">胜率</div><div class="m-val">72%</div></div>
+            <div><div class="m-label">盈亏比</div><div class="m-val">1.5</div></div>
+          </div>
+        </div>
+        <div class="strategy-card">
+          <span class="strategy-tag">风控模块</span>
+          <h4>动态仓位管理</h4>
+          <p>ATR 波动率自适应仓位 + 移动止损保护 + 单笔最大回撤限制，守住本金</p>
+          <div class="strategy-metrics">
+            <div><div class="m-label">最大回撤</div><div class="m-val">＜8%</div></div>
+            <div><div class="m-label">风险等级</div><div class="m-val">中低</div></div>
+          </div>
+        </div>
+        <div class="strategy-card">
+          <span class="strategy-tag">智能过滤</span>
+          <h4>新闻事件避让</h4>
+          <p>重大经济数据发布前自动减仓/平仓，规避非农/利率决议等高波动风险</p>
+          <div class="strategy-metrics">
+            <div><div class="m-label">覆盖事件</div><div class="m-val">20+</div></div>
+            <div><div class="m-label">触发频率</div><div class="m-val">月均8次</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quant-stats">
+        <div class="quant-stat"><div class="qs-val">24/5</div><div class="qs-label">全天候运行</div></div>
+        <div class="quant-stat"><div class="qs-val">＜50ms</div><div class="qs-label">订单执行延迟</div></div>
+        <div class="quant-stat"><div class="qs-val">3层</div><div class="qs-label">风控过滤体系</div></div>
+        <div class="quant-stat"><div class="qs-val">MT4</div><div class="qs-label">主流平台兼容</div></div>
       </div>
     </div>
   </section>
@@ -361,14 +496,14 @@
       <div class="divider"></div>
       <span class="section-label">PRODUCT</span>
       <h2 class="section-title">EA 全自动交易工具</h2>
-      <p class="section-desc">MT4 智能交易系统，全自动下单/止损/止盈，无需盯盘。每天只需检查 5 分钟，让交易真正实现自动化。</p>
+      <p class="section-desc">MT4 量化交易系统，多策略算法驱动，全自动下单/止损/止盈，无需盯盘。每天只需检查 5 分钟，让算法为你交易。</p>
 
       <div class="product-block">
         <div class="product-header">
           <div class="product-icon">💹</div>
           <div>
-            <h3>EA 智能交易系统</h3>
-            <div class="sub">MT4 平台 · 全自动运行 · 7天试用</div>
+            <h3>EA 量化交易系统</h3>
+            <div class="sub">MT4 平台 · 多策略驱动 · 7天试用</div>
           </div>
         </div>
 
@@ -563,7 +698,7 @@
         </div>
         <div class="contact-card">
           <div class="label">Followme</div>
-          <div class="value" style="font-size:0.95rem;">搜索「夏祥瑞」查看实盘</div>
+          <div class="value" style="font-size:0.95rem;">搜索「天蓝水清」查看实盘</div>
         </div>
       </div>
 
@@ -580,6 +715,21 @@
   </footer>
 
   <script>
+    // 生成K线装饰
+    (function() {
+      var deco = document.getElementById('klineDeco');
+      if (!deco) return;
+      var bars = 30;
+      var html = '';
+      for (var i = 0; i < bars; i++) {
+        var h = 20 + Math.random() * 80;
+        var up = Math.random() > 0.4;
+        var color = up ? '#5fd49a' : '#f87171';
+        html += '<div class="kline-bar" style="height:' + h + '%;background:' + color + '"></div>';
+      }
+      deco.innerHTML = html;
+    })();
+
     function copyWechat() {
       navigator.clipboard.writeText('13272920669').then(() => {
         const el = document.querySelector('.wechat-copy');
