@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>夏祥瑞 BlissXia | EA智能交易 · AI实战教练 · 一人公司增长</title>
-  <meta name="description" content="EA全自动交易工具，先试用后付费，盈利再分成。一人公司AI智能体实战教练，帮你实现业务自动化。让AI成为你的最强同事。" />
-  <meta property="og:title" content="夏祥瑞 BlissXia | EA智能交易 · 先试用后付费" />
-  <meta property="og:description" content="EA全自动交易，半年盈利5万+。先试用后付费，不盈利不收钱。还有AI智能体搭建服务。" />
+  <title>夏祥瑞 BlissXia | EA智能交易 · 先试用后付费</title>
+  <meta name="description" content="EA全自动交易工具，实盘半年盈利5万+。先试用后付费，不盈利不收钱。Followme真实记录可查，1对1远程协助手把手教。" />
+  <meta property="og:title" content="夏祥瑞 BlissXia | EA智能交易" />
+  <meta property="og:description" content="EA全自动交易，先试用后付费，盈利再分成。实盘半年盈利5万+。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gsyyx.netlify.app/" />
   <meta property="og:image" content="https://gsyyx.netlify.app/og-image.png" />
@@ -17,413 +17,276 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --primary-light: #dbeafe;
-      --accent: #0ea5e9;
-      --accent2: #10b981;
-      --bg: #f8fafc;
-      --bg-dark: #0f172a;
-      --text: #1e293b;
-      --text-light: #64748b;
-      --white: #ffffff;
-      --border: #e2e8f0;
+      --gold: #c9a961;
+      --gold-light: #e2c98f;
+      --gold-dark: #a0864a;
+      --bg: #0a0e17;
+      --bg2: #0f1521;
+      --bg3: #161e2e;
+      --bg-card: #1a2236;
+      --border: rgba(201,169,97,0.15);
+      --border-hover: rgba(201,169,97,0.4);
+      --text: #f0f4f8;
+      --text-mid: #b8c2d1;
+      --text-dim: #6b7588;
+      --green: #5fd49a;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* === Nav === */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,14,23,0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
       padding: 0 2rem;
     }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-    .nav-brand { font-weight: 700; font-size: 1.1rem; color: var(--primary); text-decoration: none; }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--text-light); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--primary); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-brand { font-weight: 700; font-size: 1.05rem; color: var(--gold); text-decoration: none; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.88rem; font-weight: 500; transition: color 0.25s; }
+    .nav-links a:hover { color: var(--gold); }
     .nav-cta {
-      background: var(--primary);
-      color: white !important;
-      padding: 0.5rem 1.2rem;
-      border-radius: 50px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--bg) !important;
+      padding: 0.5rem 1.3rem;
+      border-radius: 4px;
       font-size: 0.85rem !important;
+      font-weight: 700 !important;
+      transition: all 0.25s;
     }
-    .nav-cta:hover { background: var(--primary-dark); }
+    .nav-cta:hover { background: linear-gradient(135deg, var(--gold-light), var(--gold)); transform: translateY(-1px); }
 
     /* === Hero === */
     .hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
-      color: white;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 8rem 2rem 5rem;
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 0%, #1a2340 0%, #0a0e17 60%);
     }
     .hero::before {
-      content: '';
-      position: absolute;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%);
-      top: -200px; right: -200px;
+      content: ''; position: absolute; width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(201,169,97,0.08) 0%, transparent 60%);
+      top: -100px; left: 50%; transform: translateX(-50%);
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
-      bottom: -100px; left: -100px;
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,169,97,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,97,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
     }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(16,185,129,0.15);
-      border: 1px solid rgba(16,185,129,0.3);
-      padding: 0.35rem 1rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      color: #6ee7b7;
-      margin-bottom: 1.5rem;
-    }
-    .hero-badge .dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; animation: pulse-dot 2s infinite; }
-    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-    .avatar {
-      width: 110px; height: 110px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem; font-weight: 700;
-      margin-bottom: 1.2rem;
-      border: 2px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-    }
-    .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.2rem; }
-    .hero .en-name { font-size: 1.05rem; opacity: 0.7; margin-bottom: 0.8rem; letter-spacing: 0.06em; }
-    .hero .tags { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.2rem; }
-    .hero .tag {
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      padding: 0.35rem 1rem;
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201,169,97,0.1);
+      border: 1px solid var(--border-hover);
+      padding: 0.4rem 1.1rem;
       border-radius: 50px;
       font-size: 0.82rem;
-      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--gold-light);
+      margin-bottom: 2rem;
+      position: relative; z-index: 1;
     }
-    .hero .slogan { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .hero .slogan-sub { font-size: 0.95rem; opacity: 0.65; margin-bottom: 2rem; font-style: italic; }
-    .hero .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-    .cta-btn {
-      display: inline-block;
-      padding: 0.85rem 2.2rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .cta-primary {
-      background: var(--accent2);
-      color: white;
-      box-shadow: 0 4px 20px rgba(16,185,129,0.35);
-    }
-    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.45); }
-    .cta-secondary {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-    }
-    .cta-secondary:hover { background: rgba(255,255,255,0.18); }
+    .hero-badge .dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1; box-shadow:0 0 8px var(--green)} 50%{opacity:0.3; box-shadow:0 0 2px var(--green)} }
 
-    /* === Sections Common === */
-    .section { padding: 5rem 2rem; }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.3rem; position: relative; z-index: 1; }
+    .hero .en-name { font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.8rem; position: relative; z-index: 1; }
+    .hero .tagline { font-size: 1.3rem; color: var(--text-mid); font-weight: 400; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+    .hero .tagline strong { color: var(--gold-light); font-weight: 600; }
+    .hero .slogan { font-size: 0.92rem; color: var(--text-dim); margin-bottom: 2.5rem; position: relative; z-index: 1; font-style: italic; }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+    .btn-gold {
+      display: inline-block; padding: 0.95rem 2.5rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--bg); border-radius: 4px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none;
+      transition: all 0.25s; letter-spacing: 0.02em;
+      box-shadow: 0 4px 24px rgba(201,169,97,0.25);
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(201,169,97,0.4); background: linear-gradient(135deg, var(--gold-light), var(--gold)); }
+    .btn-ghost {
+      display: inline-block; padding: 0.95rem 2.5rem;
+      background: transparent; color: var(--text-mid);
+      border: 1px solid var(--border-hover);
+      border-radius: 4px; font-weight: 500; font-size: 0.95rem; text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: var(--text-dim); font-size: 0.75rem; letter-spacing: 0.2em; z-index: 1; }
+
+    /* === Section Common === */
+    .section { padding: 6rem 2rem; position: relative; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--primary);
-      background: var(--primary-light);
-      padding: 0.25rem 0.8rem;
-      border-radius: 4px;
-      margin-bottom: 1rem;
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--gold); margin-bottom: 1.2rem;
     }
-    .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em; }
-    .section-desc { color: var(--text-light); font-size: 1.05rem; max-width: 600px; margin-bottom: 3rem; line-height: 1.8; }
-    .section-dark { background: var(--bg-dark); color: white; }
-    .section-dark .section-desc { color: rgba(255,255,255,0.6); }
-    .section-dark .section-title { color: white; }
-    .section-dark .section-label { background: rgba(37,99,235,0.3); color: #93c5fd; }
+    .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em; line-height: 1.3; }
+    .section-desc { color: var(--text-mid); font-size: 1.05rem; max-width: 620px; margin-bottom: 3.5rem; line-height: 1.8; }
+    .divider { width: 48px; height: 2px; background: var(--gold); margin-bottom: 1.2rem; }
 
-    /* === Trust Strip === */
-    .trust-strip {
-      background: white;
+    /* === Trust Bar === */
+    .trust-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 1.5rem 2rem;
-      text-align: center;
-    }
-    .trust-strip-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-    .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-light); font-weight: 500; }
-    .trust-item .icon { font-size: 1.2rem; }
-
-    /* === Product Cards === */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .product-card {
-      background: white;
-      border-radius: 20px;
       padding: 2.5rem 2rem;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
     }
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-    }
-    .product-card.featured { border-color: var(--accent2); }
-    .product-card.featured::before {
-      content: '推荐';
-      position: absolute;
-      top: 20px; right: -30px;
-      background: var(--accent2);
-      color: white;
-      padding: 0.2rem 2.5rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      transform: rotate(45deg);
-    }
-    .product-icon {
-      width: 56px; height: 56px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      margin-bottom: 1.2rem;
-    }
-    .product-icon.ea { background: #ecfdf5; }
-    .product-icon.ai { background: var(--primary-light); }
-    .product-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .product-card .subtitle { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem; }
-    .product-features { list-style: none; margin-bottom: 1.5rem; }
-    .product-features li {
-      padding: 0.5rem 0;
-      font-size: 0.9rem;
-      color: var(--text-light);
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      border-bottom: 1px solid #f1f5f9;
-    }
-    .product-features li:last-child { border: none; }
-    .product-features li::before { content: '✓'; color: var(--accent2); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-    .product-price { font-size: 2rem; font-weight: 800; margin-bottom: 0.3rem; }
-    .product-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-light); }
-    .product-note { font-size: 0.8rem; color: var(--text-light); margin-bottom: 1.2rem; }
-    .btn {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      padding: 0.8rem 0;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-green { background: var(--accent2); color: white; }
-    .btn-green:hover { background: #059669; }
-    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-    .btn-outline:hover { background: var(--primary); color: white; }
-
-    /* === Funnel Section === */
-    .funnel { position: relative; margin-top: 2rem; }
-    .funnel-step {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      padding: 1.5rem 2rem;
-      background: rgba(255,255,255,0.04);
-      border-radius: 16px;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.2s;
-    }
-    .funnel-step:hover { background: rgba(255,255,255,0.08); }
-    .funnel-num {
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    .funnel-num.n1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-    .funnel-num.n2 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-    .funnel-num.n3 { background: linear-gradient(135deg, #ec4899, #db2777); }
-    .funnel-num.n4 { background: linear-gradient(135deg, #f59e0b, #d97706); }
-    .funnel-num.n5 { background: linear-gradient(135deg, #10b981, #059669); }
-    .funnel-step h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; }
-    .funnel-step p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
-    .funnel-arrow { text-align: center; color: rgba(255,255,255,0.2); font-size: 1.5rem; margin: -0.3rem 0; }
-
-    /* === Mechanism Cards === */
-    .mech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .mech-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-      text-align: center;
-      transition: all 0.2s;
-    }
-    .mech-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
-    .mech-icon { font-size: 2rem; margin-bottom: 1rem; }
-    .mech-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .mech-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+    .trust-bar-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: var(--text-mid); }
+    .trust-item .icon { font-size: 1.3rem; }
+    .trust-item strong { color: var(--gold-light); font-weight: 600; }
 
     /* === Stats === */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      margin-top: 0; background: var(--bg2);
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
     }
-    .stat-card {
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 1.8rem 1.5rem;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.08);
+    .stat-cell { padding: 2.5rem 1.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num { font-size: 2.6rem; font-weight: 800; color: var(--gold); letter-spacing: -0.02em; }
+    .stat-label { font-size: 0.82rem; color: var(--text-dim); margin-top: 0.4rem; letter-spacing: 0.05em; }
+
+    /* === Product Detail === */
+    .product-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 3rem; margin-top: 0;
+      position: relative; overflow: hidden;
     }
-    .stat-card .num { font-size: 2.2rem; font-weight: 800; color: var(--accent2); }
-    .stat-card .label { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+    .product-block::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .product-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+    .product-icon { width: 64px; height: 64px; border-radius: 14px; background: rgba(201,169,97,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; border: 1px solid var(--border); }
+    .product-header h3 { font-size: 1.6rem; font-weight: 700; }
+    .product-header .sub { font-size: 0.85rem; color: var(--text-dim); }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+    .feature-item { display: flex; gap: 0.8rem; align-items: flex-start; }
+    .feature-item .check { width: 22px; height: 22px; border-radius: 50%; background: rgba(95,212,154,0.15); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .feature-item .text { font-size: 0.92rem; color: var(--text-mid); line-height: 1.6; }
+    .feature-item .text strong { color: var(--text); font-weight: 600; }
+
+    .price-box {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.8rem 2rem; background: var(--bg3); border-radius: 12px;
+      border: 1px solid var(--border); flex-wrap: wrap; gap: 1.5rem;
+    }
+    .price-left .price { font-size: 2.4rem; font-weight: 800; color: var(--gold); }
+    .price-left .price span { font-size: 0.9rem; font-weight: 400; color: var(--text-dim); }
+    .price-left .note { font-size: 0.82rem; color: var(--text-dim); margin-top: 0.3rem; }
+    .price-right .btn-gold { padding: 0.8rem 2rem; }
+
+    /* === Funnel === */
+    .funnel { position: relative; }
+    .funnel-line { position: absolute; left: 31px; top: 24px; bottom: 24px; width: 2px; background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%); opacity: 0.3; }
+    .funnel-step { display: flex; gap: 1.5rem; padding: 1.2rem 0; position: relative; }
+    .funnel-num {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--bg2); border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem; color: var(--gold); flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .funnel-content { padding-top: 0.6rem; }
+    .funnel-content h4 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.6rem; }
+    .funnel-content h4 .en { font-size: 0.75rem; color: var(--text-dim); font-weight: 400; letter-spacing: 0.1em; }
+    .funnel-content p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; }
+
+    /* === Trust Mechanism === */
+    .mech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .mech-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+      padding: 2.5rem 2rem; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .mech-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .mech-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .mech-card:hover::before { transform: scaleX(1); }
+    .mech-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(201,169,97,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.2rem; }
+    .mech-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .mech-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.7; }
+
+    /* === Referral === */
+    .referral-box {
+      background: linear-gradient(135deg, var(--bg2), var(--bg3));
+      border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; margin-top: 2rem;
+    }
+    .referral-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
+    .referral-table { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .referral-cell { background: var(--bg); border-radius: 12px; padding: 1.5rem 1rem; text-align: center; border: 1px solid var(--border); }
+    .referral-cell .num { font-size: 1.8rem; font-weight: 800; color: var(--gold); margin-bottom: 0.3rem; }
+    .referral-cell .desc { font-size: 0.82rem; color: var(--text-mid); }
 
     /* === FAQ === */
-    .faq-list { margin-top: 2rem; }
+    .faq-list { margin-top: 0; }
     .faq-item {
-      background: white;
-      border-radius: 14px;
-      padding: 1.5rem 2rem;
-      margin-bottom: 0.8rem;
-      border: 1px solid var(--border);
-      transition: all 0.2s;
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem 1.8rem; margin-bottom: 0.8rem; transition: all 0.25s;
     }
-    .faq-item:hover { border-color: var(--primary); }
-    .faq-q { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
-    .faq-q::before { content: 'Q'; color: var(--primary); font-size: 0.8rem; font-weight: 800; }
-    .faq-a { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; padding-left: 1.5rem; }
-    .faq-a::before { content: 'A '; color: var(--accent2); font-weight: 700; }
+    .faq-item:hover { border-color: var(--border-hover); }
+    .faq-q { font-weight: 600; font-size: 1rem; margin-bottom: 0.6rem; color: var(--text); }
+    .faq-a { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; }
 
     /* === Contact === */
-    .contact-section {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-      color: white;
-      text-align: center;
-    }
-    .contact-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
+    .contact-section { text-align: center; background: radial-gradient(ellipse at 50% 100%, #1a2340 0%, var(--bg) 70%); }
+    .contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 0; max-width: 800px; margin-left: auto; margin-right: auto; }
     .contact-card {
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2rem 1.5rem;
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: background 0.2s;
+      background: var(--bg2); backdrop-filter: blur(10px);
+      border-radius: 14px; padding: 2.2rem 1.5rem;
+      border: 1px solid var(--border); transition: all 0.25s;
     }
-    .contact-card:hover { background: rgba(255,255,255,0.14); }
-    .contact-card .label { font-size: 0.78rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
-    .contact-card .value { font-size: 1.15rem; font-weight: 700; word-break: break-all; }
-    .contact-card .value a { color: white; text-decoration: none; }
-    .contact-card .value a:hover { text-decoration: underline; }
+    .contact-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+    .contact-card .label { font-size: 0.72rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.7rem; font-weight: 600; }
+    .contact-card .value { font-size: 1.1rem; font-weight: 600; color: var(--text); word-break: break-all; }
+    .contact-card .value a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .contact-card .value a:hover { color: var(--gold); }
     .wechat-copy { cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
-    .wechat-copy::after { content: '📋'; font-size: 0.85rem; opacity: 0.5; }
+    .wechat-copy::after { content: '📋'; font-size: 0.8rem; opacity: 0.4; }
 
     /* === Footer === */
-    footer {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      color: var(--text-light);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-      background: white;
-    }
-    footer a { color: var(--primary); text-decoration: none; }
+    footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--border); background: var(--bg2); }
+    footer p { font-size: 0.85rem; color: var(--text-dim); }
+    footer .disclaimer { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.5rem; opacity: 0.6; }
 
     /* === Responsive === */
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .hero h1 { font-size: 2rem; }
-      .hero .slogan { font-size: 1.2rem; }
-      .section { padding: 3.5rem 1.5rem; }
-      .section-title { font-size: 1.5rem; }
-      .product-grid { grid-template-columns: 1fr; }
-      .funnel-step { flex-direction: column; text-align: center; gap: 0.8rem; }
-      .trust-strip-inner { gap: 1.5rem; }
+      .hero h1 { font-size: 2.3rem; }
+      .hero .tagline { font-size: 1.05rem; }
+      .section { padding: 4rem 1.5rem; }
+      .section-title { font-size: 1.6rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-cell:nth-child(odd) { border-right: 1px solid var(--border); }
+      .stat-cell:nth-last-child(-n+2) { border-bottom: none; }
+      .mech-grid { grid-template-columns: 1fr; }
+      .referral-table { grid-template-columns: 1fr; }
+      .product-block { padding: 2rem 1.5rem; }
+      .price-box { flex-direction: column; text-align: center; }
+      .funnel-line { left: 31px; }
+      .trust-bar-inner { gap: 1.5rem; }
     }
 
     /* === Animations === */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate { animation: fadeUp 0.7s ease both; }
-    .hero > * { animation: fadeUp 0.6s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .hero > * { animation: fadeUp 0.7s ease both; }
     .hero > *:nth-child(1) { animation-delay: 0.05s; }
     .hero > *:nth-child(2) { animation-delay: 0.1s; }
     .hero > *:nth-child(3) { animation-delay: 0.15s; }
@@ -434,9 +297,6 @@
     .hero > *:nth-child(8) { animation-delay: 0.4s; }
     .hero > *:nth-child(9) { animation-delay: 0.45s; }
     .hero > *:nth-child(10) { animation-delay: 0.5s; }
-
-    .highlight { color: var(--primary); font-weight: 600; }
-    .highlight-green { color: var(--accent2); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -447,7 +307,7 @@
       <a href="#" class="nav-brand">BlissXia</a>
       <ul class="nav-links">
         <li><a href="#product">产品</a></li>
-        <li><a href="#funnel">转化路径</a></li>
+        <li><a href="#funnel">流程</a></li>
         <li><a href="#trust">信任机制</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact" class="nav-cta">免费咨询</a></li>
@@ -457,137 +317,142 @@
 
   <!-- Hero -->
   <section class="hero">
+    <div class="hero-grid"></div>
     <div class="hero-badge"><span class="dot"></span> 现已开放试用</div>
-    <div class="avatar">XR</div>
     <h1>夏祥瑞</h1>
-    <div class="en-name">BlissXia · 君信科技联合创始人</div>
-    <div class="tags">
-      <span class="tag">EA 智能交易</span>
-      <span class="tag">AI 智能体实战教练</span>
-      <span class="tag">一人公司增长</span>
+    <div class="en-name">BlissXia</div>
+    <div class="tagline">EA 全自动智能交易 · <strong>先试用后付费</strong></div>
+    <div class="tagline">实盘运行半年，盈利 <strong>5 万+</strong></div>
+    <div class="slogan">不盈利不收钱 · 盈利再分成 · Followme 真实记录可查</div>
+    <div class="hero-cta">
+      <a href="#product" class="btn-gold">了解详情 →</a>
+      <a href="#contact" class="btn-ghost">免费咨询</a>
     </div>
-    <div class="slogan">让 AI 成为你的最强同事</div>
-    <div class="slogan-sub">Make AI Your Strongest Teammate</div>
-    <div class="cta-group">
-      <a href="#product" class="cta-btn cta-primary">了解产品 →</a>
-      <a href="#contact" class="cta-btn cta-secondary">免费咨询</a>
-    </div>
+    <div class="hero-scroll">SCROLL ↓</div>
   </section>
 
-  <!-- Trust Strip -->
-  <div class="trust-strip">
-    <div class="trust-strip-inner">
-      <div class="trust-item"><span class="icon">🔒</span> 99元押金 · 不盈利全额退</div>
-      <div class="trust-item"><span class="icon">🤝</span> 先试用后付费 · 盈利再分成</div>
-      <div class="trust-item"><span class="icon">🎯</span> 1对1远程协助 · 手把手教</div>
-      <div class="trust-item"><span class="icon">📊</span> 真实交易记录 · Followme可查</div>
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item"><span class="icon">🔒</span> <strong>99元押金</strong> 不盈利全额退</div>
+      <div class="trust-item"><span class="icon">🤝</span> <strong>先试用后付费</strong> 盈利再分成</div>
+      <div class="trust-item"><span class="icon">🎯</span> <strong>1对1远程协助</strong> 手把手教</div>
+      <div class="trust-item"><span class="icon">📊</span> <strong>Followme</strong> 真实记录可查</div>
     </div>
   </div>
 
-  <!-- About -->
-  <section class="section" id="about">
+  <!-- Stats -->
+  <section class="section" id="stats" style="padding-top:4rem; padding-bottom:4rem;">
     <div class="section-inner">
-      <span class="section-label">ABOUT</span>
-      <h2 class="section-title">关于我</h2>
-      <p class="section-desc">
-        我是 <span class="highlight">夏祥瑞（BlissXia）</span>，<span class="highlight">君信科技联合创始人</span>，
-        一人公司 AI 智能体实战教练。我跑通了两条业务线：<span class="highlight-green">EA 全自动交易</span>和<span class="highlight">AI 智能体自动化</span>。
-        核心理念：AI 不应只是聊天工具，而应成为每个创业者真正的<span class="highlight">数字员工</span>，让一人公司拥有十人团队的战斗力。
-      </p>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section class="section" id="product" style="background:#fff;">
-    <div class="section-inner">
-      <span class="section-label">PRODUCTS</span>
-      <h2 class="section-title">产品与服务</h2>
-      <p class="section-desc">两条核心业务线，覆盖交易自动化与业务自动化</p>
-      <div class="product-grid">
-
-        <!-- EA Product -->
-        <div class="product-card featured">
-          <div class="product-icon ea">💹</div>
-          <h3>EA 全自动交易工具</h3>
-          <div class="subtitle">MT4 智能交易系统 · 全自动运行</div>
-          <ul class="product-features">
-            <li>全自动下单/止损/止盈，无需盯盘</li>
-            <li>每天只需检查 5 分钟</li>
-            <li>实盘运行半年，盈利 5万+（Followme 可查）</li>
-            <li>1对1远程协助安装 + 视频教程</li>
-            <li>7天试用，无盈利全额退款</li>
-          </ul>
-          <div class="product-price">99 <span>元押金起</span></div>
-          <div class="product-note">先试用后付费 · 盈利后30%分成 · 不盈利不收钱</div>
-          <a href="#contact" class="btn btn-green">立即试用 →</a>
-        </div>
-
-        <!-- AI Service -->
-        <div class="product-card">
-          <div class="product-icon ai">🤖</div>
-          <h3>AI 智能体搭建服务</h3>
-          <div class="subtitle">定制你的 AI 数字员工</div>
-          <ul class="product-features">
-            <li>业务 AI 智能体定制搭建</li>
-            <li>重复工作流自动化改造</li>
-            <li>一人公司增长方案设计</li>
-            <li>1对1实战教练辅导</li>
-            <li>免费初次咨询，按需报价</li>
-          </ul>
-          <div class="product-price">定制 <span>报价</span></div>
-          <div class="product-note">先聊需求，再定方案</div>
-          <a href="#contact" class="btn btn-outline">免费咨询 →</a>
-        </div>
-
+      <div class="stats-row">
+        <div class="stat-cell"><div class="stat-num">5万+</div><div class="stat-label">半年实盘盈利</div></div>
+        <div class="stat-cell"><div class="stat-num">7天</div><div class="stat-label">免费试用期</div></div>
+        <div class="stat-cell"><div class="stat-num">30%</div><div class="stat-label">盈利分成比例</div></div>
+        <div class="stat-cell"><div class="stat-num">1对1</div><div class="stat-label">远程协助安装</div></div>
       </div>
     </div>
   </section>
 
-  <!-- Conversion Funnel -->
-  <section class="section section-dark" id="funnel">
+  <!-- Product -->
+  <section class="section" id="product">
     <div class="section-inner">
-      <span class="section-label">HOW IT WORKS</span>
-      <h2 class="section-title">EA 转化闭环：5步让你放心使用</h2>
-      <p class="section-desc">透明化流程，每一步都为你考虑</p>
+      <div class="divider"></div>
+      <span class="section-label">PRODUCT</span>
+      <h2 class="section-title">EA 全自动交易工具</h2>
+      <p class="section-desc">MT4 智能交易系统，全自动下单/止损/止盈，无需盯盘。每天只需检查 5 分钟，让交易真正实现自动化。</p>
+
+      <div class="product-block">
+        <div class="product-header">
+          <div class="product-icon">💹</div>
+          <div>
+            <h3>EA 智能交易系统</h3>
+            <div class="sub">MT4 平台 · 全自动运行 · 7天试用</div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="check">✓</div>
+            <div class="text"><strong>全自动交易</strong>，自动下单/止损/止盈，无需盯盘</div>
+          </div>
+          <div class="feature-item">
+            <div class="check">✓</div>
+            <div class="text">每天只需<strong>检查 5 分钟</strong>，解放你的时间</div>
+          </div>
+          <div class="feature-item">
+            <div class="check">✓</div>
+            <div class="text">实盘运行半年，盈利 <strong>5万+</strong>（Followme 可查）</div>
+          </div>
+          <div class="feature-item">
+            <div class="check">✓</div>
+            <div class="text"><strong>1对1远程协助</strong>安装，手把手教到会用</div>
+          </div>
+          <div class="feature-item">
+            <div class="check">✓</div>
+            <div class="text">提供<strong>安装视频教程</strong> + FAQ 文档</div>
+          </div>
+          <div class="feature-item">
+            <div class="check">✓</div>
+            <div class="text">7天试用，<strong>无盈利全额退款</strong></div>
+          </div>
+        </div>
+
+        <div class="price-box">
+          <div class="price-left">
+            <div class="price">99 <span>元押金起</span></div>
+            <div class="note">先试用后付费 · 盈利后30%分成 · 不盈利不收钱</div>
+          </div>
+          <div class="price-right">
+            <a href="#contact" class="btn-gold">立即试用 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Funnel -->
+  <section class="section" id="funnel" style="background: var(--bg2);">
+    <div class="section-inner">
+      <div class="divider"></div>
+      <span class="section-label">PROCESS</span>
+      <h2 class="section-title">5步让你放心使用</h2>
+      <p class="section-desc">透明化流程，每一步都为你考虑，从了解到付费全程无忧</p>
 
       <div class="funnel">
+        <div class="funnel-line"></div>
         <div class="funnel-step">
-          <div class="funnel-num n1">01</div>
-          <div>
-            <h4>触达 Reach</h4>
-            <p>Followme 实盘展示 + 微信公众号 + 小红书多渠道曝光，预估触达 300-500 人</p>
+          <div class="funnel-num">01</div>
+          <div class="funnel-content">
+            <h4>触达 <span class="en">REACH</span></h4>
+            <p>Followme 实盘展示 + 微信公众号 + 小红书多渠道曝光，真实盈利记录建立初步信任</p>
           </div>
         </div>
-        <div class="funnel-arrow">↓</div>
         <div class="funnel-step">
-          <div class="funnel-num n2">02</div>
-          <div>
-            <h4>吸引 Attract</h4>
-            <p>真实盈利记录 + "30%盈利分成"利益一致 + "先试用后付费"零风险承诺，建立信任</p>
+          <div class="funnel-num">02</div>
+          <div class="funnel-content">
+            <h4>吸引 <span class="en">ATTRACT</span></h4>
+            <p>真实盈利记录 + "30%盈利分成"利益一致 + "先试用后付费"零风险承诺，三重保障降低你的顾虑</p>
           </div>
         </div>
-        <div class="funnel-arrow">↓</div>
         <div class="funnel-step">
-          <div class="funnel-num n3">03</div>
-          <div>
-            <h4>转化 Convert</h4>
-            <p>收 99 元押金 → 试用 7 天 → 无盈利全额退 / 有盈利押金抵分成，消除信任障碍</p>
+          <div class="funnel-num">03</div>
+          <div class="funnel-content">
+            <h4>转化 <span class="en">CONVERT</span></h4>
+            <p>收 99 元押金 → 试用 7 天 → 无盈利全额退 / 有盈利押金抵分成，用机制而非承诺保障你的利益</p>
           </div>
         </div>
-        <div class="funnel-arrow">↓</div>
         <div class="funnel-step">
-          <div class="funnel-num n4">04</div>
-          <div>
-            <h4>交付 Deliver</h4>
-            <p>发 EA 安装包 + 视频教程 + 1对1远程协助（30-60分钟手把手教），7天跟进服务</p>
+          <div class="funnel-num">04</div>
+          <div class="funnel-content">
+            <h4>交付 <span class="en">DELIVER</span></h4>
+            <p>发 EA 安装包 + 视频教程 + 1对1远程协助（30-60分钟手把手教），7天内每天跟进不干扰</p>
           </div>
         </div>
-        <div class="funnel-arrow">↓</div>
         <div class="funnel-step">
-          <div class="funnel-num n5">05</div>
-          <div>
-            <h4>复购 & 推荐</h4>
-            <p>持续分账 + 推荐奖励（最高终身免费），让用户帮你裂变增长</p>
+          <div class="funnel-num">05</div>
+          <div class="funnel-content">
+            <h4>复购 & 推荐 <span class="en">RETAIN</span></h4>
+            <p>持续分账 + 推荐奖励（最高终身免费），让老用户帮你裂变增长，双赢共生</p>
           </div>
         </div>
       </div>
@@ -595,11 +460,13 @@
   </section>
 
   <!-- Trust Mechanism -->
-  <section class="section" id="trust" style="background:#fff;">
+  <section class="section" id="trust">
     <div class="section-inner">
+      <div class="divider"></div>
       <span class="section-label">TRUST</span>
       <h2 class="section-title">三位一体信任机制</h2>
       <p class="section-desc">你的顾虑我们都想到了，用机制而非承诺保障你的利益</p>
+
       <div class="mech-grid">
         <div class="mech-card">
           <div class="mech-icon">🛡️</div>
@@ -614,59 +481,62 @@
         <div class="mech-card">
           <div class="mech-icon">🎁</div>
           <h3>激励机制</h3>
-          <p>Early Bird 奖励：分成降至 25% · 推荐 1 人免 1 月分成 · 推荐 5 人终身免费 · 社区荣誉公开表彰诚信用户。</p>
+          <p>Early Bird 奖励：分成降至 25% · 推荐成功有奖励 · 社区荣誉公开表彰诚信用户。</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Stats -->
-  <section class="section section-dark" id="stats">
-    <div class="section-inner">
-      <span class="section-label">METRICS</span>
-      <h2 class="section-title">关键数据</h2>
-      <p class="section-desc">EA 转化漏斗预估指标（基于 Followme 现有粉丝基础）</p>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="num">300-500</div><div class="label">预估触达人数</div></div>
-        <div class="stat-card"><div class="num">30-50</div><div class="label">咨询人数</div></div>
-        <div class="stat-card"><div class="num">15-25</div><div class="label">试用人数</div></div>
-        <div class="stat-card"><div class="num">7-10</div><div class="label">首月付费人数</div></div>
-        <div class="stat-card"><div class="num">70%</div><div class="label">运行→付费转化率</div></div>
-        <div class="stat-card"><div class="num">7-12</div><div class="label">第3月总付费用户</div></div>
+      <div class="referral-box">
+        <h3>🎁 推荐奖励机制</h3>
+        <div class="referral-table">
+          <div class="referral-cell">
+            <div class="num">1人</div>
+            <div class="desc">免 1 个月分成资格</div>
+          </div>
+          <div class="referral-cell">
+            <div class="num">2人</div>
+            <div class="desc">永久 25% 分成（原30%）</div>
+          </div>
+          <div class="referral-cell">
+            <div class="num">5人</div>
+            <div class="desc">终身免费使用 EA（0分成）</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section" id="faq" style="background:#fff;">
+  <section class="section" id="faq" style="background: var(--bg2);">
     <div class="section-inner">
+      <div class="divider"></div>
       <span class="section-label">FAQ</span>
       <h2 class="section-title">常见问题</h2>
       <p class="section-desc">你可能关心的几个问题</p>
+
       <div class="faq-list">
         <div class="faq-item">
-          <div class="faq-q">EA 真的能盈利吗？</div>
-          <div class="faq-a">EA 是交易工具，不保证盈利。但我本人实盘运行半年盈利 5万+，Followme 可查真实记录。交易有风险，请理性决策。</div>
+          <div class="faq-q">Q：EA 真的能盈利吗？</div>
+          <div class="faq-a">A：EA 是交易工具，不保证盈利。但我本人实盘运行半年盈利 5万+，Followme 可查真实记录。交易有风险，请理性决策。</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">我不会用 MT4，能学会吗？</div>
-          <div class="faq-a">完全没问题。我提供 5 分钟安装视频教程 + 1对1远程协助（TeamViewer/向日葵），手把手教你安装和设置参数，30-60 分钟搞定。</div>
+          <div class="faq-q">Q：我不会用 MT4，能学会吗？</div>
+          <div class="faq-a">A：完全没问题。我提供 5 分钟安装视频教程 + 1对1远程协助（TeamViewer/向日葵），手把手教你安装和设置参数，30-60 分钟搞定。</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">试用结束不想用了，押金能退吗？</div>
-          <div class="faq-a">能。7 天内无盈利，99 元全额退还。协议写得清清楚楚，按流程走就行。</div>
+          <div class="faq-q">Q：试用结束不想用了，押金能退吗？</div>
+          <div class="faq-a">A：能。7 天内无盈利，99 元全额退还。协议写得清清楚楚，按流程走就行。</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">30% 分成是怎么算的？</div>
-          <div class="faq-a">盈利后支付盈利金额的 30%。比如你这个月 EA 帮你赚了 1000 元，付我 300 元。不盈利不收费。99 元押金直接抵首批分成。</div>
+          <div class="faq-q">Q：30% 分成是怎么算的？</div>
+          <div class="faq-a">A：盈利后支付盈利金额的 30%。比如你这个月 EA 帮你赚了 1000 元，付我 300 元。不盈利不收费。99 元押金直接抵首批分成。</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">EA 需要一直开着电脑吗？</div>
-          <div class="faq-a">是的，MT4 需要保持运行。建议用 VPS 云服务器（约 30 元/月），24 小时在线，不用担心电脑关机。</div>
+          <div class="faq-q">Q：EA 需要一直开着电脑吗？</div>
+          <div class="faq-a">A：是的，MT4 需要保持运行。建议用 VPS 云服务器（约 30 元/月），24 小时在线，不用担心电脑关机。</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">能把 EA 分享给别人吗？</div>
-          <div class="faq-a">不能。协议明确规定不得传播/售卖 EA。但你可以推荐朋友来试用，推荐成功有奖励（免分成甚至终身免费）。</div>
+          <div class="faq-q">Q：能把 EA 分享给别人吗？</div>
+          <div class="faq-a">A：不能。协议明确规定不得传播/售卖 EA。但你可以推荐朋友来试用，推荐成功有奖励（免分成甚至终身免费）。</div>
         </div>
       </div>
     </div>
@@ -675,22 +545,28 @@
   <!-- Contact -->
   <section class="section contact-section" id="contact">
     <div class="section-inner">
-      <span class="section-label" style="background:rgba(255,255,255,0.15); color:rgba(255,255,255,0.8);">CONTACT</span>
-      <h2 class="section-title" style="color:white;">联系我</h2>
-      <p class="section-desc" style="color:rgba(255,255,255,0.65); margin:0 auto 2rem;">欢迎加微信或发邮件交流，免费咨询</p>
+      <div class="divider" style="margin:0 auto 1.2rem;"></div>
+      <span class="section-label">CONTACT</span>
+      <h2 class="section-title">联系我</h2>
+      <p class="section-desc" style="margin-left:auto; margin-right:auto;">欢迎加微信或发邮件交流，免费咨询</p>
+
       <div class="contact-cards">
         <div class="contact-card">
-          <div class="label">邮箱 Email</div>
+          <div class="label">邮箱</div>
           <div class="value"><a href="mailto:Yzxxr@qq.com">Yzxxr@qq.com</a></div>
         </div>
         <div class="contact-card">
-          <div class="label">微信 WeChat</div>
+          <div class="label">微信</div>
           <div class="value"><span class="wechat-copy" onclick="copyWechat()">13272920669</span></div>
         </div>
         <div class="contact-card">
           <div class="label">Followme</div>
-          <div class="value" style="font-size:0.95rem;">搜索「夏祥瑞」查看实盘记录</div>
+          <div class="value" style="font-size:0.95rem;">搜索「夏祥瑞」查看实盘</div>
         </div>
+      </div>
+
+      <div style="margin-top: 3rem;">
+        <a href="mailto:Yzxxr@qq.com" class="btn-gold">立即咨询 →</a>
       </div>
     </div>
   </section>
@@ -698,7 +574,7 @@
   <!-- Footer -->
   <footer>
     <p>© 2025 夏祥瑞 BlissXia · 君信科技 · 让 AI 成为你的最强同事</p>
-    <p style="margin-top:0.3rem;font-size:0.78rem;color:#94a3b8;">交易有风险，EA 不保证盈利，请理性决策。</p>
+    <p class="disclaimer">交易有风险，EA 不保证盈利，请理性决策。</p>
   </footer>
 
   <script>
