@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 40%, #0ea5e9 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: white;
+    overflow: hidden;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+    top: -150px; right: -100px;
+  }
+  body::after {
+    content: '';
+    position: absolute;
+    width: 350px; height: 350px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+    bottom: -80px; left: -80px;
+  }
+  .content { text-align: center; position: relative; z-index: 1; }
+  .name { font-size: 64px; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .en-name { font-size: 28px; font-weight: 300; opacity: 0.75; letter-spacing: 0.08em; margin-bottom: 24px; }
+  .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 10px 32px;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 30px;
+  }
+  .slogan {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: 0.03em;
+  }
+  .sub { font-size: 18px; opacity: 0.65; font-weight: 300; }
+  .dot { display: inline-block; width: 8px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 50%; margin: 0 12px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<div class="content">
+  <div class="name">夏祥瑞</div>
+  <div class="en-name">BlissXia</div>
+  <div class="tag">一人公司 AI 智能体实战教练</div>
+  <div class="slogan">让 AI 成为你的最强同事</div>
+  <div class="sub">君信科技联合创始人</div>
+</div>
+</body>
+</html>
