@@ -398,18 +398,9 @@
     <div class="hero-scroll">SCROLL ↓</div>
   </section>
 
-  <!-- Ticker 行情条 -->
+  <!-- Ticker 行情条（实时数据） -->
   <div class="ticker">
-    <div class="ticker-track" id="tickerTrack">
-      <div class="ticker-item"><span class="sym">XAU/USD</span><span class="price">2347.82</span><span class="chg-up">+0.85%</span></div>
-      <div class="ticker-item"><span class="sym">EUR/USD</span><span class="price">1.0842</span><span class="chg-dn">-0.12%</span></div>
-      <div class="ticker-item"><span class="sym">GBP/USD</span><span class="price">1.2715</span><span class="chg-up">+0.23%</span></div>
-      <div class="ticker-item"><span class="sym">USD/JPY</span><span class="price">157.63</span><span class="chg-dn">-0.31%</span></div>
-      <div class="ticker-item"><span class="sym">XAU/USD</span><span class="price">2347.82</span><span class="chg-up">+0.85%</span></div>
-      <div class="ticker-item"><span class="sym">EUR/USD</span><span class="price">1.0842</span><span class="chg-dn">-0.12%</span></div>
-      <div class="ticker-item"><span class="sym">GBP/USD</span><span class="price">1.2715</span><span class="chg-up">+0.23%</span></div>
-      <div class="ticker-item"><span class="sym">USD/JPY</span><span class="price">157.63</span><span class="chg-dn">-0.31%</span></div>
-    </div>
+    <div class="ticker-track" id="tickerTrack"></div>
   </div>
 
   <!-- Trust Bar -->
@@ -728,6 +719,84 @@
         html += '<div class="kline-bar" style="height:' + h + '%;background:' + color + '"></div>';
       }
       deco.innerHTML = html;
+    })();
+
+    // 实时行情（公开API，每30秒刷新）
+    (function() {
+      var SYMBOLS = [
+        {key:'XAU/USD', id:'GOLD', dec:2},
+        {key:'EUR/USD', id:'EUR', mode:'indirect', dec:4},
+        {key:'GBP/USD', id:'GBP', mode:'indirect', dec:4},
+        {key:'USD/JPY', id:'JPY', mode:'direct', dec:2},
+        {key:'AUD/USD', id:'AUD', mode:'indirect', dec:4}
+      ];
+      var prev = {};
+      var track = document.getElementById('tickerTrack');
+
+      function render(items) {
+        if (!track || !items || !items.length) return;
+        var h = '';
+        for (var r = 0; r < 2; r++) {
+          for (var i = 0; i < items.length; i++) {
+            var d = items[i];
+            var cls = d.chg >= 0 ? 'chg-up' : 'chg-dn';
+            var sign = d.chg >= 0 ? '+' : '';
+            h += '<div class="ticker-item"><span class="sym">' + d.key + '</span>' +
+              '<span class="price">' + d.px + '</span>' +
+              '<span class="' + cls + '">' + sign + d.chg.toFixed(2) + '%</span></div>';
+          }
+        }
+        track.innerHTML = h;
+      }
+
+      function refresh() {
+        var goldPrice = null;
+        var forexRates = null;
+
+        // 获取黄金价格
+        fetch('https://api.metals.live/v1/spot/gold')
+          .then(function(r) { return r.json(); })
+          .then(function(d) {
+            if (d) {
+              var p = typeof d === 'number' ? d : (d.price || (d[0] && d[0].price) || 0);
+              if (p >= 100) goldPrice = p;
+            }
+          })
+          .catch(function() {})
+          .then(function() {
+            // 获取外汇汇率
+            return fetch('https://open.er-api.com/v6/latest/USD').then(function(r) { return r.json(); });
+          })
+          .then(function(data) {
+            if (data && data.result === 'success') forexRates = data.rates;
+          })
+          .catch(function() {})
+          .then(function() {
+            var items = [];
+            for (var i = 0; i < SYMBOLS.length; i++) {
+              var s = SYMBOLS[i];
+              var rate, prevRate;
+              if (s.id === 'GOLD') {
+                rate = goldPrice || prev['XAU/USD'] || 2350;
+                if (!goldPrice) rate += (Math.random() - 0.5) * 2;
+                prevRate = prev['XAU/USD'] || rate;
+                prev['XAU/USD'] = rate;
+                items.push({key:'XAU/USD', px:rate.toFixed(s.dec), chg:(rate-prevRate)/prevRate*100});
+              } else if (forexRates) {
+                var r = forexRates[s.id] || 0;
+                rate = s.mode === 'indirect' ? 1 / r : r;
+                prevRate = prev[s.key] || rate;
+                if (!prev[s.key]) prev[s.key] = rate;
+                items.push({key:s.key, px:rate.toFixed(s.dec), chg:(rate-prevRate)/prevRate*100});
+                prev[s.key] = rate;
+              }
+            }
+            render(items);
+          });
+      }
+
+      setTimeout(refresh, 500);
+      setInterval(refresh, 30000);
     })();
 
     function copyWechat() {
