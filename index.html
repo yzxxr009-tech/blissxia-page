@@ -721,7 +721,7 @@
       deco.innerHTML = html;
     })();
 
-    // 实时行情（公开API，计算真实日涨跌幅）
+    // 实时行情（并行请求+超时保护，确保不卡页面）
     (function() {
       var SYMBOLS = [
         {key:'XAU/USD', id:'GOLD', dec:2},
@@ -748,72 +748,86 @@
         track.innerHTML = h;
       }
 
-      // 从frankfurter格式转换为显示汇率
-      // frankfurter返回的是1USD兑换多少目标货币
-      // EUR/USD = 1/EUR_rate, GBP/USD = 1/GBP_rate
-      // USD/JPY = JPY_rate, AUD/USD = 1/AUD_rate
+      // 带超时的fetch（5秒超时，避免卡住页面）
+      function fetchTimeout(url, ms) {
+        return Promise.race([
+          fetch(url).then(function(r) { return r.json(); }),
+          new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, ms); })
+        ]);
+      }
+
       function getRate(rates, id) {
-        if (id === 'JPY') return rates.JPY;
-        return 1 / rates[id];
+        return id === 'JPY' ? rates.JPY : 1 / rates[id];
+      }
+
+      // 降级数据（API全挂时显示）
+      function fallback() {
+        render([
+          {key:'XAU/USD', px:'4006.20', chg:0.15},
+          {key:'EUR/USD', px:'1.1345', chg:0.46},
+          {key:'GBP/USD', px:'1.3173', chg:0.42},
+          {key:'USD/JPY', px:'161.68', chg:0.09},
+          {key:'AUD/USD', px:'0.6900', chg:0.54}
+        ]);
       }
 
       function refresh() {
-        var todayRates = null;
-        var yestRates = null;
-        var goldPrice = null;
-        var goldBase = null;
+        var goldPrice = null, goldBase = null;
+        var todayRates = null, yestRates = null;
+        var done = 0, total = 3;
 
-        // 获取黄金当前价格
-        fetch('https://api.gold-api.com/price/XAU')
-          .then(function(r) { return r.json(); })
-          .then(function(d) {
-            if (d && d.price && d.price >= 100) goldPrice = d.price;
-            // localStorage里取黄金基准价（当日首次记录）
-            var saved = localStorage.getItem('xau_base');
-            goldBase = saved ? parseFloat(saved) : null;
-            if (!goldBase) {
-              localStorage.setItem('xau_base', goldPrice || 4000);
-              goldBase = goldPrice || 4000;
-            }
-          })
-          .catch(function() {})
-          .then(function() {
-            // 获取今日汇率
-            return fetch('https://api.frankfurter.dev/v1/latest?from=USD').then(function(r) { return r.json(); });
-          })
-          .then(function(data) {
-            if (data && data.rates) todayRates = data.rates;
-            // 获取昨日汇率（自动计算日期）
-            var d = new Date();
-            d.setDate(d.getDate() - 1);
-            var yestDate = d.toISOString().slice(0, 10);
-            return fetch('https://api.frankfurter.dev/v1/' + yestDate + '?from=USD').then(function(r) { return r.json(); });
-          })
-          .then(function(data) {
-            if (data && data.rates) yestRates = data.rates;
-          })
-          .catch(function() {})
-          .then(function() {
+        function checkDone() {
+          done++;
+          if (done >= total) {
             var items = [];
             for (var i = 0; i < SYMBOLS.length; i++) {
               var s = SYMBOLS[i];
               if (s.id === 'GOLD') {
-                var px = goldPrice || 4000;
+                var px = goldPrice || 4006;
                 var base = goldBase || px;
-                var chg = (px - base) / base * 100;
-                items.push({key: s.key, px: px.toFixed(s.dec), chg: chg});
+                items.push({key: s.key, px: px.toFixed(s.dec), chg: (px - base) / base * 100});
               } else if (todayRates && yestRates && yestRates[s.id]) {
                 var today = getRate(todayRates, s.id);
                 var yest = getRate(yestRates, s.id);
-                var chg2 = (today - yest) / yest * 100;
-                items.push({key: s.key, px: today.toFixed(s.dec), chg: chg2});
+                items.push({key: s.key, px: today.toFixed(s.dec), chg: (today - yest) / yest * 100});
               }
             }
-            render(items);
-          });
+            if (items.length > 0) render(items); else fallback();
+          }
+        }
+
+        // 并行请求黄金价格
+        fetchTimeout('https://api.gold-api.com/price/XAU', 5000)
+          .then(function(d) {
+            if (d && d.price && d.price >= 100) {
+              goldPrice = d.price;
+              var saved = localStorage.getItem('xau_base');
+              goldBase = saved ? parseFloat(saved) : null;
+              if (!goldBase) { localStorage.setItem('xau_base', goldPrice); goldBase = goldPrice; }
+            }
+          })
+          .catch(function() {})
+          .then(checkDone);
+
+        // 并行请求今日汇率
+        fetchTimeout('https://api.frankfurter.dev/v1/latest?from=USD', 5000)
+          .then(function(d) { if (d && d.rates) todayRates = d.rates; })
+          .catch(function() {})
+          .then(checkDone);
+
+        // 并行请求昨日汇率
+        var dd = new Date();
+        dd.setDate(dd.getDate() - 1);
+        var yd = dd.toISOString().slice(0, 10);
+        fetchTimeout('https://api.frankfurter.dev/v1/' + yd + '?from=USD', 5000)
+          .then(function(d) { if (d && d.rates) yestRates = d.rates; })
+          .catch(function() {})
+          .then(checkDone);
       }
 
-      setTimeout(refresh, 500);
+      // 先显示降级数据，避免空白
+      fallback();
+      setTimeout(refresh, 800);
       setInterval(refresh, 30000);
     })();
 
