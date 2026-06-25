@@ -754,13 +754,10 @@
         var forexRates = null;
 
         // 获取黄金价格
-        fetch('https://api.metals.live/v1/spot/gold')
+        fetch('https://api.gold-api.com/price/XAU')
           .then(function(r) { return r.json(); })
           .then(function(d) {
-            if (d) {
-              var p = typeof d === 'number' ? d : (d.price || (d[0] && d[0].price) || 0);
-              if (p >= 100) goldPrice = p;
-            }
+            if (d && d.price && d.price >= 100) goldPrice = d.price;
           })
           .catch(function() {})
           .then(function() {
