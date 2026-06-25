@@ -721,16 +721,15 @@
       deco.innerHTML = html;
     })();
 
-    // 实时行情（公开API，每30秒刷新）
+    // 实时行情（公开API，计算真实日涨跌幅）
     (function() {
       var SYMBOLS = [
         {key:'XAU/USD', id:'GOLD', dec:2},
-        {key:'EUR/USD', id:'EUR', mode:'indirect', dec:4},
-        {key:'GBP/USD', id:'GBP', mode:'indirect', dec:4},
-        {key:'USD/JPY', id:'JPY', mode:'direct', dec:2},
-        {key:'AUD/USD', id:'AUD', mode:'indirect', dec:4}
+        {key:'EUR/USD', id:'EUR', dec:4},
+        {key:'GBP/USD', id:'GBP', dec:4},
+        {key:'USD/JPY', id:'JPY', dec:2},
+        {key:'AUD/USD', id:'AUD', dec:4}
       ];
-      var prev = {};
       var track = document.getElementById('tickerTrack');
 
       function render(items) {
@@ -749,43 +748,65 @@
         track.innerHTML = h;
       }
 
-      function refresh() {
-        var goldPrice = null;
-        var forexRates = null;
+      // 从frankfurter格式转换为显示汇率
+      // frankfurter返回的是1USD兑换多少目标货币
+      // EUR/USD = 1/EUR_rate, GBP/USD = 1/GBP_rate
+      // USD/JPY = JPY_rate, AUD/USD = 1/AUD_rate
+      function getRate(rates, id) {
+        if (id === 'JPY') return rates.JPY;
+        return 1 / rates[id];
+      }
 
-        // 获取黄金价格
+      function refresh() {
+        var todayRates = null;
+        var yestRates = null;
+        var goldPrice = null;
+        var goldBase = null;
+
+        // 获取黄金当前价格
         fetch('https://api.gold-api.com/price/XAU')
           .then(function(r) { return r.json(); })
           .then(function(d) {
             if (d && d.price && d.price >= 100) goldPrice = d.price;
+            // localStorage里取黄金基准价（当日首次记录）
+            var saved = localStorage.getItem('xau_base');
+            goldBase = saved ? parseFloat(saved) : null;
+            if (!goldBase) {
+              localStorage.setItem('xau_base', goldPrice || 4000);
+              goldBase = goldPrice || 4000;
+            }
           })
           .catch(function() {})
           .then(function() {
-            // 获取外汇汇率
-            return fetch('https://open.er-api.com/v6/latest/USD').then(function(r) { return r.json(); });
+            // 获取今日汇率
+            return fetch('https://api.frankfurter.dev/v1/latest?from=USD').then(function(r) { return r.json(); });
           })
           .then(function(data) {
-            if (data && data.result === 'success') forexRates = data.rates;
+            if (data && data.rates) todayRates = data.rates;
+            // 获取昨日汇率（自动计算日期）
+            var d = new Date();
+            d.setDate(d.getDate() - 1);
+            var yestDate = d.toISOString().slice(0, 10);
+            return fetch('https://api.frankfurter.dev/v1/' + yestDate + '?from=USD').then(function(r) { return r.json(); });
+          })
+          .then(function(data) {
+            if (data && data.rates) yestRates = data.rates;
           })
           .catch(function() {})
           .then(function() {
             var items = [];
             for (var i = 0; i < SYMBOLS.length; i++) {
               var s = SYMBOLS[i];
-              var rate, prevRate;
               if (s.id === 'GOLD') {
-                rate = goldPrice || prev['XAU/USD'] || 2350;
-                if (!goldPrice) rate += (Math.random() - 0.5) * 2;
-                prevRate = prev['XAU/USD'] || rate;
-                prev['XAU/USD'] = rate;
-                items.push({key:'XAU/USD', px:rate.toFixed(s.dec), chg:(rate-prevRate)/prevRate*100});
-              } else if (forexRates) {
-                var r = forexRates[s.id] || 0;
-                rate = s.mode === 'indirect' ? 1 / r : r;
-                prevRate = prev[s.key] || rate;
-                if (!prev[s.key]) prev[s.key] = rate;
-                items.push({key:s.key, px:rate.toFixed(s.dec), chg:(rate-prevRate)/prevRate*100});
-                prev[s.key] = rate;
+                var px = goldPrice || 4000;
+                var base = goldBase || px;
+                var chg = (px - base) / base * 100;
+                items.push({key: s.key, px: px.toFixed(s.dec), chg: chg});
+              } else if (todayRates && yestRates && yestRates[s.id]) {
+                var today = getRate(todayRates, s.id);
+                var yest = getRate(yestRates, s.id);
+                var chg2 = (today - yest) / yest * 100;
+                items.push({key: s.key, px: today.toFixed(s.dec), chg: chg2});
               }
             }
             render(items);
